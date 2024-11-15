@@ -26,7 +26,7 @@ internal class Program
 
             IList<DbSetEntities.HomePage> homePages = GetHomePages();
 
-            Console.WriteLine($"Inserting {homePages.Count} homepages into database");
+            //Console.WriteLine($"Inserting {homePages.Count} homepages into database");
 
             foreach (DbSetEntities.HomePage homePage in homePages)
             {
@@ -37,7 +37,7 @@ internal class Program
 
             homePages = context.HomePages.ToList();
 
-            Console.WriteLine($"Read {homePages.Count} homepages from database");
+            //Console.WriteLine($"Read {homePages.Count} homepages from database");
 
             // Disable Identity Insert for seed data
             context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [HomePage] OFF");
@@ -53,7 +53,7 @@ internal class Program
 
             IList<DbSetEntities.Title> titles = GetTitles();
 
-            Console.WriteLine($"Inserting {titles.Count} titles into database");
+            //Console.WriteLine($"Inserting {titles.Count} titles into database");
 
             foreach (DbSetEntities.Title title in titles)
             {
@@ -64,14 +64,14 @@ internal class Program
 
             titles = context.Titles.ToList();
 
-            Console.WriteLine($"Read {titles.Count} titles from database");
+            //Console.WriteLine($"Read {titles.Count} titles from database");
 
             // Disable Identity Insert for seed data
             context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [Title] OFF");
 
             #endregion
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #region Employees
 
@@ -80,7 +80,7 @@ internal class Program
 
             IList<DbSetEntities.Employee> employees = GetEmployees();
 
-            Console.WriteLine($"Inserting {employees.Count} employees into database");
+            //Console.WriteLine($"Inserting {employees.Count} employees into database");
 
             foreach (DbSetEntities.Employee employee in employees)
             {
@@ -91,21 +91,30 @@ internal class Program
 
             employees = context.Employees.ToList();
 
-            Console.WriteLine($"Read {employees.Count} employees from database");
+            //Console.WriteLine($"Read {employees.Count} employees from database");
 
             // Disable Identity Insert for seed data
             context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [Employee] OFF");
 
             #endregion
 
-            Console.WriteLine();
-            Console.WriteLine();
-
-            ChangeTracker changeTracker = context.ChangeTracker;
-
-            Console.WriteLine(changeTracker.DebugView.LongView);
-
             _dbContextTransaction.Commit();
+
+            //Console.WriteLine();
+            //Console.WriteLine();
+
+            //ChangeTracker changeTracker = context.ChangeTracker;
+
+            //Console.WriteLine(changeTracker.DebugView.LongView);
+
+            Console.WriteLine();
+            Console.WriteLine("------------------------------------------------------------------");
+            Console.WriteLine();
+
+            foreach (string executedCommand in context.ExecutedCommands)
+            {
+                Console.WriteLine(executedCommand);
+            }
         }
     }
 
